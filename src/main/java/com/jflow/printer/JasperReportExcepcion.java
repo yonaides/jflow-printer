@@ -7,7 +7,7 @@ package com.jflow.printer;
 
 /**
  *
- * @author hventura@citrus.com.do
+ * @author hectorvent@gmail.com
  */
 public class JasperReportExcepcion extends Exception {
 
