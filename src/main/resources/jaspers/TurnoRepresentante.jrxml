@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-02-12T13:46:46 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket_turno" pageWidth="230" pageHeight="400" whenNoDataType="AllSectionsNoDetail" columnWidth="202" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" isIgnorePagination="true" uuid="82b62dca-2720-40e8-bf3b-15247090bb3b">
+	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1039"/>
+	<parameter name="oficina" class="java.lang.String">
+		<defaultValueExpression><![CDATA["2130 - OFICINA PRINCIPAL"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="turno" class="java.lang.String">
+		<defaultValueExpression><![CDATA["A 57"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="servicio" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PAGO DE FACTURA"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nombre" class="java.lang.String">
+		<defaultValueExpression><![CDATA["HECTOR VENTURA REYES"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nic" class="java.lang.String">
+		<defaultValueExpression><![CDATA["251142"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="250" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="43" width="202" height="15" uuid="5f11e1b3-07e3-4fbf-a0b8-1649bef98737">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{oficina}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="89" width="202" height="40" uuid="fe984b4d-5f93-4901-8eb7-00a52af6c64b"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{turno}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="65" width="202" height="24" uuid="3b90b0a7-4bf3-4523-8690-39da7a249803"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom" markup="none">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[# TURNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="202" height="30" uuid="b1aedb30-d3f2-4d84-b652-52219ef8a000"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDENORTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="140" width="60" height="20" uuid="0f3e4384-8cae-450d-8ea2-3486f9c833ec"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contrato : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="160" width="60" height="20" uuid="1b3620a4-6108-49e5-ad5a-3905802b4666"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Servicio : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="180" width="60" height="20" uuid="4986e168-0f99-4b4c-b532-48312575e237"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="140" width="100" height="20" uuid="46b348ae-8081-400a-beb7-94069068e410"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nic}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="160" width="130" height="20" uuid="9815991a-71d2-4cb8-b52b-274a80405489"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{servicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="180" width="130" height="20" uuid="15e5b07d-2ecd-4711-a866-96c3814e9ac0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy hh:mm:ss a">
+				<reportElement x="9" y="209" width="182" height="20" forecolor="#454545" uuid="c8dbcb46-11a9-4fe6-8bfc-f1a5603a6be7"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="34" splitType="Stretch"/>
+	</summary>
+</jasperReport>
