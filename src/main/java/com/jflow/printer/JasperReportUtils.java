@@ -5,6 +5,9 @@
  */
 package com.jflow.printer;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -12,6 +15,7 @@ import java.sql.Connection;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import net.sf.jasperreports.engine.JRExporterParameter;
@@ -28,18 +32,19 @@ public class JasperReportUtils {
 
     private static final Map<String, Object> PARAMETERS = new HashMap();
     private static final Logger LOG = LogManager.getLogger(JasperReportUtils.class);
-    private String jasperFile;
+    private String jasperResource;
+    private File fileJasper;
 
     public static JasperReportUtils newReport() {
         return new JasperReportUtils();
     }
 
-    public String getJasperFile() {
-        return jasperFile;
+    public String getJasperResource() {
+        return jasperResource;
     }
 
-    public JasperReportUtils setJasperFile(String jasperFile) {
-        this.jasperFile = jasperFile;
+    public JasperReportUtils setJasperResource(String jasperResource) {
+        this.jasperResource = jasperResource;
         return this;
     }
 
@@ -55,6 +60,15 @@ public class JasperReportUtils {
 
     public JasperReportUtils clearAll() {
         PARAMETERS.clear();
+        return this;
+    }
+
+    public File getFileJasper() {
+        return fileJasper;
+    }
+
+    public JasperReportUtils setFileJasper(File fileJasper) {
+        this.fileJasper = fileJasper;
         return this;
     }
 
@@ -84,17 +98,30 @@ public class JasperReportUtils {
             }
         }
 
-        if (p != null) {
-            printOnService(p);
-        }
+//        if (p != null) {
+        printOnService(p);
+//        }
 
     }
 
     public void printOnService(PrintService ps) throws JasperReportExcepcion {
 
+        LOG.info("[EJECUTANDO PRINT SERVICE]");
+        InputStream is = null;
+
+        if (fileJasper != null && fileJasper.exists()) {
+            try {
+                is = new FileInputStream(fileJasper);
+            } catch (FileNotFoundException ex) {
+            }
+
+        } else {
+            is = JasperPrint.class.getResourceAsStream(jasperResource);
+        }
+
+        Objects.requireNonNull(is, "JasperFile not found!");
+
         try {
-            LOG.info("[EJECUTANDO PRINT SERVICE]");
-            InputStream is = JasperPrint.class.getResourceAsStream(jasperFile);
             JasperPrint jp = JasperFillManager.fillReport(is, PARAMETERS, (Connection) null);
             JRPrintServiceExporter jPrinter = new JRPrintServiceExporter();
             jPrinter.setParameter(JRExporterParameter.JASPER_PRINT, jp);

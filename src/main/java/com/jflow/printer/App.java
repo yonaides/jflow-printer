@@ -7,9 +7,6 @@ package com.jflow.printer;
 
 import com.jflow.jflowcore.JflowCoreWS;
 import com.jflow.jflowcore.JflowWSType;
-import com.jflow.jflowcore.Message;
-import com.jflow.jflowcore.MessageListener;
-import com.jflow.jflowcore.MessageType;
 import com.jflow.jflowcore.RestStatusCheker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,49 +15,28 @@ import org.apache.logging.log4j.Logger;
  *
  * @author hectorvent@gmail.com
  */
-public class App implements MessageListener {
+public class App {
 
     private static final Logger LOG = LogManager.getLogger(App.class);
-    private JasperReportUtils rp = null;
 
     public void start() {
 
-        // Iniciamos despues de haber iniciado toda la configuración
-        rp = new JasperReportUtils();
-        rp.setJasperFile("/jaspers/TurnoRepresentante.jasper");
+        LOG.info("Starting 'JflowCoreWS [Mode => Printer]' ");
 
         JflowCoreWS.createWsCore(JflowWSType.PRINTER)
-                .addQueueMessageListener(this)
+                //Imprimir en orden de llegada
+                .addQueueMessageListener(new TicketPrint())
+                // Desgargar archivo en el Hilo indempendiente
+                .addMessageListener(new TicketDownloader())
                 .start();
 
         RestStatusCheker.getRestatusCheker()
                 .addMessageListener(message -> {
-                    System.out.println(message);
+                    LOG.info("Message : {}");
                 });
 
-    }
+        LOG.info("Started 'JflowCoreWS [Modo => Printer]' ");
 
-    @Override
-    public void onMessage(Message message) {
-
-        LOG.info("MENSAJE: {}", message.toString());
-
-        if (MessageType.PRINT.equals(message.getTipoMensaje())) {
-            try {
-                message.getMensaje()
-                        .entrySet()
-                        .stream()
-                        .forEach((entry) -> {
-                            rp.put(entry.getKey(), entry.getValue());
-                        });
-
-                LOG.info("[IMPRESORA] {}", "");
-                rp.printOnPrinter("");
-
-            } catch (JasperReportExcepcion ex) {
-                LOG.error("Error Imprimiendo ", ex);
-            }
-        }
     }
 
     public static void main(String[] args) {

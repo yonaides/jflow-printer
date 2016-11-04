@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
-<!-- 2016-02-12T13:46:46 -->
+<!-- 2016-11-03T14:13:31 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket_turno" pageWidth="230" pageHeight="400" whenNoDataType="AllSectionsNoDetail" columnWidth="202" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" isIgnorePagination="true" uuid="82b62dca-2720-40e8-bf3b-15247090bb3b">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
@@ -17,10 +17,13 @@
 	<parameter name="nombre" class="java.lang.String">
 		<defaultValueExpression><![CDATA["HECTOR VENTURA REYES"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="nic" class="java.lang.String">
+	<parameter name="cuenta" class="java.lang.String">
 		<defaultValueExpression><![CDATA["251142"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="fecha" class="java.lang.String"/>
+	<parameter name="empresa" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -53,18 +56,11 @@
 				<text><![CDATA[# TURNO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="13" width="202" height="30" uuid="b1aedb30-d3f2-4d84-b652-52219ef8a000"/>
-				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font size="20" isBold="true"/>
-				</textElement>
-				<text><![CDATA[EDENORTE]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="9" y="140" width="60" height="20" uuid="0f3e4384-8cae-450d-8ea2-3486f9c833ec"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Contrato : ]]></text>
+				<text><![CDATA[CUENTA : ]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="9" y="160" width="60" height="20" uuid="1b3620a4-6108-49e5-ad5a-3905802b4666"/>
@@ -85,7 +81,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{nic}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{cuenta}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="69" y="160" width="130" height="20" uuid="9815991a-71d2-4cb8-b52b-274a80405489"/>
@@ -107,6 +103,13 @@
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="13" width="202" height="30" uuid="87c2fb94-edac-4db7-980d-d7c2e4321924"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{empresa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
