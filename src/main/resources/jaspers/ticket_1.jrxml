@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.1.final using JasperReports Library version 6.1.1  -->
+<!-- 2016-11-03T14:13:31 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ticket_turno" pageWidth="230" pageHeight="400" whenNoDataType="AllSectionsNoDetail" columnWidth="202" leftMargin="14" rightMargin="14" topMargin="14" bottomMargin="14" isIgnorePagination="true" uuid="82b62dca-2720-40e8-bf3b-15247090bb3b">
 	<property name="ireport.zoom" value="3.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="302"/>
+	<property name="ireport.y" value="1039"/>
 	<parameter name="oficina" class="java.lang.String">
 		<defaultValueExpression><![CDATA["2130 - OFICINA PRINCIPAL"]]></defaultValueExpression>
 	</parameter>
@@ -54,12 +56,33 @@
 				<text><![CDATA[# TURNO]]></text>
 			</staticText>
 			<staticText>
+				<reportElement x="9" y="140" width="60" height="20" uuid="0f3e4384-8cae-450d-8ea2-3486f9c833ec"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUENTA : ]]></text>
+			</staticText>
+			<staticText>
 				<reportElement x="9" y="160" width="60" height="20" uuid="1b3620a4-6108-49e5-ad5a-3905802b4666"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
 					<font size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Servicio : ]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="9" y="180" width="60" height="20" uuid="4986e168-0f99-4b4c-b532-48312575e237"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" markup="none">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="69" y="140" width="100" height="20" uuid="46b348ae-8081-400a-beb7-94069068e410"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cuenta}]]></textFieldExpression>
+			</textField>
 			<textField>
 				<reportElement x="69" y="160" width="130" height="20" uuid="9815991a-71d2-4cb8-b52b-274a80405489"/>
 				<textElement verticalAlignment="Middle">
@@ -67,8 +90,15 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$P{servicio}]]></textFieldExpression>
 			</textField>
+			<textField>
+				<reportElement x="69" y="180" width="130" height="20" uuid="15e5b07d-2ecd-4711-a866-96c3814e9ac0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
 			<textField pattern="dd/MM/yyyy hh:mm:ss a">
-				<reportElement x="9" y="183" width="182" height="20" forecolor="#454545" uuid="c8dbcb46-11a9-4fe6-8bfc-f1a5603a6be7"/>
+				<reportElement x="9" y="209" width="182" height="20" forecolor="#454545" uuid="c8dbcb46-11a9-4fe6-8bfc-f1a5603a6be7"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

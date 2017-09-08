@@ -5,9 +5,11 @@
  */
 package com.jflow.printer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -19,8 +21,10 @@ import java.util.Objects;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporterParameter;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -98,9 +102,7 @@ public class JasperReportUtils {
             }
         }
 
-//        if (p != null) {
         printOnService(p);
-//        }
 
     }
 
@@ -113,6 +115,7 @@ public class JasperReportUtils {
             try {
                 is = new FileInputStream(fileJasper);
             } catch (FileNotFoundException ex) {
+                LOG.log(Level.FATAL, "Archivo no encontrado {0}", ex);
             }
 
         } else {
@@ -123,19 +126,42 @@ public class JasperReportUtils {
 
         try {
             JasperPrint jp = JasperFillManager.fillReport(is, PARAMETERS, (Connection) null);
-            JRPrintServiceExporter jPrinter = new JRPrintServiceExporter();
-            jPrinter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
 
+            System.out.println("JasperPrint = " + jp);
+
+            JRPrintServiceExporter jPrinter = new JRPrintServiceExporter();
+            
+            printPreview(jp);
+
+            /*jPrinter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
             if (ps != null) {
                 jPrinter.setParameter(JRPrintServiceExporterParameter.PRINT_SERVICE, ps);
             }
-
-            jPrinter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, false);
-            jPrinter.exportReport();
-
+            jPrinter.setParameter(JRPrintServiceExporterParameter.DISPLAY_PRINT_DIALOG, true);
+            jPrinter.exportReport();*/
         } catch (JRException ex) {
             throw new JasperReportExcepcion("Error al ejecutar reporte ", ex);
         }
+    }
+
+    public void printPreview(JasperPrint jp) {
+
+        try {
+
+            JRPdfExporter exporter = new JRPdfExporter();
+            exporter.setParameter(JRExporterParameter.CHARACTER_ENCODING, "UTF-8");
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jp);
+            exporter.setParameter(JRExporterParameter.OUTPUT_FILE,new File("ticket.pdf"));
+
+            try {
+                exporter.exportReport();
+            } catch (JRException ex) {
+                java.util.logging.Logger.getLogger(JasperReportUtils.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            }
+        } catch (Exception ex) {
+
+        }
+
     }
 
 }
